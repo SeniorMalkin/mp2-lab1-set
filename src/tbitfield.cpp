@@ -12,6 +12,10 @@ TBitField::TBitField(int len)
 	BitLen = len;
 	MemLen = (BitLen - 1) / (sizeof(TELEM) * 8) + 1;
 	pMem = new TELEM[MemLen];
+	
+	for(int i=0;i<MemLen;i++)
+		pMem[i]=0;
+		
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
@@ -129,12 +133,27 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
-	string str;
-    
+	char sym;
+	int i=0;
+	istr>>sym;
+	while((sym=='1')||(sym=='0'))
+	{if (sym==0) bf.ClrBit(i);
+	else 
+	bf.SetBit(i);
+	i++;
+	istr>>sym;
+	}
+	return istr;
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
 	for (int i = 0; i < bf.GetLength(); i++)
-		ostr << bf.GetBit(i);
+	{
+		if(bf.GetBit(i))
+			ostr<<1;
+		else
+			ostr<<0;
+	}
+	return ostr;
 }
