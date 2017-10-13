@@ -231,7 +231,7 @@ TEST(TBitField, can_invert_bitfield)
   bf.SetBit(1);
   negBf = ~bf;
 
-  // expNegBf = 10
+  // expNegBf = 01
   expNegBf.SetBit(0);
 
   EXPECT_EQ(expNegBf, negBf);

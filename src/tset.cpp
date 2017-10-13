@@ -34,14 +34,14 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
-	if(BitField.GetBit(15))
-return 1;
+	if(BitField.GetBit(Elem))
+    return 1;
     return 0;
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
-	BitField.GetBit(Elem);
+	BitField.SetBit(Elem);
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
@@ -118,7 +118,7 @@ ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 	for(int i=0;i < s.BitField.GetLength();i++)
 	{
 		if(s.BitField.GetBit(i))
-			ostr<<i;
+			ostr<<i<<" ";
 	}
 	return ostr;
 }
